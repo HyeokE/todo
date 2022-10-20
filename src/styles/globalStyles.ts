@@ -1,5 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
+window.addEventListener('resize', () => {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+
 const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'Pretendard';

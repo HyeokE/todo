@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { DragControls } from 'framer-motion';
 import { useTheme } from 'styled-components';
 
-import { useScrollBlock } from '@utils/ScrollBlock';
+import { useScrollBlock } from '@hooks/useScrollBlock';
 
 interface Props {
   dragControls: DragControls;

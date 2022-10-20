@@ -1,23 +1,18 @@
-import styled from 'styled-components';
+import React from 'react';
 
-import TaskCardSection from '@molecules/TaskCardSection';
-import { ContainerInner, LayoutContainer } from '@styles/layouts';
+import { useAtom } from 'jotai';
 
-const Title = styled.h1`
-  margin: 20px 0;
-  font-size: ${({ theme }) => theme.fontSizes.titleXxl};
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.lavender900};
-`;
+import PopModal from '@organisms/PopModal';
+import Home from '@pages/Home';
+import { modalStore } from '@store/modalStore';
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useAtom(modalStore);
   return (
-    <LayoutContainer>
-      <ContainerInner>
-        <Title>오늘 할일</Title>
-        <TaskCardSection />
-      </ContainerInner>
-    </LayoutContainer>
+    <>
+      <PopModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <Home />
+    </>
   );
 }
 

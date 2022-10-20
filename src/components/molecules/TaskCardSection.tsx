@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Reorder } from 'framer-motion';
+import { useAtom } from 'jotai';
 import styled from 'styled-components';
 
 import TaskCard from '@atoms/TaskCard';
-import { todomocks } from '@src/mocks/todomocks';
+import { modalStore } from '@store/modalStore';
+import { todoStore } from '@store/todoStore';
 
 const TaskCardSectionContainer = styled.section`
   display: flex;
@@ -22,28 +24,10 @@ const TaskCardSectionContainerInner = styled(Reorder.Group)`
     margin-bottom: 20px;
   }
 `;
-const test = [
-  {
-    text: '🍅 Tomato',
-    date: '2021-10-10',
-  },
-  {
-    text: '🥒 Cucumber',
-    date: '2021-10-10',
-  },
-  {
-    text: '🧀 Cheese',
-    date: '2021-10-10',
-  },
-  {
-    text: '🥬 Lettuce',
-    date: '2021-10-10',
-  },
-];
 
 const TaskCardSection = () => {
-  const [tasks, setTasks] = useState(todomocks);
-
+  const [tasks, setTasks] = useAtom(todoStore);
+  const [isModal, setModal] = useAtom(modalStore);
   return (
     <TaskCardSectionContainer>
       <TaskCardSectionContainerInner
@@ -52,7 +36,9 @@ const TaskCardSection = () => {
         values={tasks}
       >
         {tasks.sort().map((item) => (
-          <TaskCard item={item} key={item.title} />
+          <div key={item.title} onClick={() => setModal(true)}>
+            <TaskCard item={item} key={item.title} />
+          </div>
         ))}
       </TaskCardSectionContainerInner>
     </TaskCardSectionContainer>
